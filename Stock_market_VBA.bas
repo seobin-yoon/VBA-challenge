@@ -1,9 +1,9 @@
-Attribute VB_Name = "Module1"
+
 Sub Stockmarket()
 
     For Each ws In Worksheets
     ws.Activate
-        
+
 
         'Header
         Range("J1").Value = "Ticker"
@@ -75,13 +75,12 @@ Sub Stockmarket()
              'red
                     Range("K" & Table_Row).Interior.ColorIndex = 3
                 End If
-                
-                                
-             
+                               
+               'For next loop
                 Table_Row = Table_Row + 1
                 Total_Stock_Volume = 0
                 Open_Year_Row = i + 1
-             
+      
             End If
             
         Next i
@@ -98,29 +97,30 @@ Sub Stockmarket()
         lr = ws.Cells(Rows.Count, 11).End(xlUp).Row
 
         For j = 2 To lr
-            
+                'Greatest Increase    
             If Range("L" & j).Value > Most_Inc Then
+                Range("P2").Value = Range("J" & j).Value
                 Most_Inc = Range("L" & j).Value
                 Range("Q2").Value = Most_Inc
                 Range("Q2").NumberFormat = "0.00%"
-                Range("P2").Value = Range("J" & j).Value
-                        
+                
+               'Greatest Decrease           
             ElseIf Range("L" & j).Value < Most_Dec Then
+                Range("P3").Value = Range("J" & j).Value
                 Most_Dec = Range("L" & j).Value
                 Range("Q3").Value = Most_Dec
                 Range("Q3").NumberFormat = "0.00%"
-                Range("P3").Value = Range("J" & j).Value
 
             End If
-            
+            'Greatest stock volume
             If Range("M" & j).Value > Most_Total_Vol Then
+                Range("P4").Value = Range("J" & j).Value
                 Most_Total_Vol = Range("M" & j).Value
                 Range("Q4").Value = Most_Total_Vol
-                Range("P4").Value = Range("J" & j).Value
+                
             
             End If
-         
-         
+  
             
         Next j
 
